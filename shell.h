@@ -181,12 +181,12 @@ int _myhistory(info_t *);
 int _myalias(info_t *);
 
 /* getline.c */
-ssize_t get input(info_t *);
+ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
 void siginHandler(int);
 
 /* getinfo.c */
-void clear_info(info_ *);
+void clear_info(info_t *);
 void set_info(info_t *, char **);
 void free_info(info_t *, int);
 

@@ -47,11 +47,11 @@ typedef struct liststr
 	int num;
 	char *str;
 	struct liststr *next;
-} list_t
+} list_t;
 
 /**
- * struct passinfo - contains pseudo-arguments to pass into a function,
- * allowing uniform prototype for function pointer struct
+ * struct passinfo - contains pseudo-arguments to pass into a function
+ * allowing uniform prototype for function pointer struct.
  * @arg: a string generated form getline containing arguments
  * @argv: an array of strings generated from arg
  * @path: a string path for the current command
@@ -74,8 +74,8 @@ typedef struct liststr
 typedef struct passinfo
 {
 	char *arg;
-	char **argv
-	char *path
+	char **argv;
+	char *path;
 	int argc;
 	unsigned int line_count;
 	int err_num;
@@ -92,7 +92,7 @@ typedef struct passinfo
 	int cmd_buf_type; /* CMD_type ||, &&, ; */
 	int readfd;
 	int histcount;
-}info_t;
+} info_t;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
@@ -109,13 +109,13 @@ typedef struct builtin
 	int (*func)(info_t *);
 } builtin_table;
 
-/* toem_shloop.c */
+/* shloop.c */
 int hsh(info_t *, char **);
 int find_builtin(info_t *);
-void find_cmd(info_t *)
+void find_cmd(info_t *);
 void fork_cmd(info_t *);
 
-/* toem_parser.c */
+/* parser.c */
 int is_cmd(info_t *, char *);
 char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
@@ -123,50 +123,113 @@ char *find_path(info_t *, char *, char *);
 /* loopsh.c */
 int loopsh(char **);
 
-/* toem_errors.c */
+/* errors.c */
 void _eputs(char *);
 int _eputchar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 
-/* toem_string.c */
-int _strlen(char *)
+/* string.c */
+int _strlen(char *);
 int _strcmp(char *, char *);
 char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
 
-/*toem_string1.c */
+/* string1.c */
 char *_strcpy(char *, char *);
 char *_strdup(const char *);
 void _puts(char *);
 int _putchar(char);
 
-/* toem_exits.c */
+/* exits.c */
 char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
 
-/*toem_tokenizer.c */
+/* tokenizer.c */
 char **strtow(char *, char *);
 char **strtow2(char *, char);
 
-/* toem_realloc.c */
+/* realloc.c */
 char *_memset(char *, char, unsigned int);
 void ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 
-/* toem_memory.c */
+/* memory.c */
 int bfree(void **);
 
-/* toem_atoi.c */
+/* atoi.c */
 int interactive(info_t *);
 int is_delim(char, char *);
 int _isalpha(int);
 int _atoi(char *);
 
-/* toem_errors1.c */
+/* errors1.c */
 int _erratoi(char *);
 void print_error(info_t *, char *);
 int print_d(int, int);
 char *convert_number(long int, int, int);
 void remove_comments(char *);
+
+/* builtin.c */
+int _myexit(info_t *);
+int _mycd(info_t *);
+int _myhelp(info_t *);
+
+/* builtin1.c */
+int _myhistory(info_t *);
+int _myalias(info_t *);
+
+/* getline.c */
+ssize_t get input(info_t *);
+int _getline(info_t *, char **, size_t *);
+void siginHandler(int);
+
+/* getinfo.c */
+void clear_info(info_ *);
+void set_info(info_t *, char **);
+void free_info(info_t *, int);
+
+/* environ.c */
+char *_getenv(info_t *, const char *);
+int _myenv(info_t *);
+int _mysetenv(info_t *);
+int _myunsetenv(info_t *);
+int populate_env_list(info_t *);
+
+/* getenv.c */
+char **get_envirn(info_t *);
+int _unsetenv(info_t *, char *);
+int _setenv(info_t *, char *, char *);
+
+/* history.c */
+char *get_history_file(info_t *info);
+int write_history(info_t *info);
+int read_history(info_t *info);
+int build_history_list(info_t *info, char *buf, int linecount);
+int renumber_history(info_t *info);
+
+/* lists.c */
+list_t *add_node_end(list_t **, const char *, int);
+list_t *add_node_end(list_t **, const char *, int);
+size_t print_list_str(const list_t *);
+int delete_note_at_index(list_t **, unsigned int);
+void free_list(list_t **);
+
+/* lists1.c */
+size_t list_len(const list_t *);
+char **list_to_strings(list_t *);
+size_t print_list(const list_t *);
+list_t *node_starts_with(list_t *, char *, char);
+ssize_t get_node_index(list_t *, list_t *);
+
+/* vars.c */
+int is_chain(info_t, char *, size_t);
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
+int replace_alias(info_t *);
+int replace_vars(info_t *);
+int replace_string(char **, char *);
+
+#endif
+
+

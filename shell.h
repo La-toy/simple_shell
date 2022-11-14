@@ -146,7 +146,7 @@ char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
 
-/* tokenizer.c */
+/* token.c */
 char **strtow(char *, char *);
 char **strtow2(char *, char);
 

@@ -15,8 +15,8 @@ int hsh(info_t *info, char **av)
 	while (r != -1 && builtin_ret != -2)
 	{
 		clear_info(info);
-		if(interactive(info))
-			_puts ("$ ");
+		if (interactive(info))
+			_puts("$ ");
 		_eputchar(BUF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
@@ -36,7 +36,7 @@ int hsh(info_t *info, char **av)
 		exit(info->status);
 	if (builtin_ret == -2)
 	{
-		if (info->err_num = -1)
+		if (info->err_num == -1)
 			exit(info->status);
 		exit(info->err_num);
 	}
@@ -111,8 +111,7 @@ void find_cmd(info_t *info)
 		if ((interactive(info) || _getenv(info, "PATH=")
 			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
-		
-		else if (*info->arg) != \n')
+		else if (*(info->arg) != \n')
 		{
 			info->status = 127;
 			print_error(info, "not found\n");
@@ -121,10 +120,10 @@ void find_cmd(info_t *info)
 }
 
 /**
- *fork_cmd - forks an exec thread to run cmd
- *@info: the parameter & return info struct
+ * fork_cmd - forks an exec thread to run cmd
+ * @info: the parameter & return info struct
  *
- *Return: void
+ * Return: void
  */
 void fork_cmd(info_t *info)
 {
@@ -133,7 +132,7 @@ void fork_cmd(info_t *info)
 	child_pid = fork();
 	if (child_pid == -1)
 	{
-		/* TO DO: PUT ERROR FUNCTION */
+		/* TODO: PUT ERROR FUNCTION */
 		perror("Error:");
 		return;
 	}
@@ -146,11 +145,11 @@ void fork_cmd(info_t *info)
 				exit(126);
 			exit(1);
 		}
-		/* TO DO: PUT ERROR FUNCTION */
+		/* TODO: PUT ERROR FUNCTION */
 	}
 	else
 	{
-		wait((&(info->status));
+		wait(&(info->status));
 		if (WIFEXITED(info->status))
 		{
 			info->status = WEXITSTATUS(info->status);

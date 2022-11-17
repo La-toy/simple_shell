@@ -161,7 +161,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
  *
  * Return: void
  */
-void sigintHandler(__attribute__((unused))int sig_num)
+void siginHandler(__attribute__((unused))int sig_num)
 {
 	_puts("\n");
 	_puts("$ ");

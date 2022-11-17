@@ -198,7 +198,7 @@ int _myunsetenv(info_t *);
 int populate_env_list(info_t *);
 
 /* getenv.c */
-char **get_envirn(info_t *);
+char **get_environ(info_t *);
 int _unsetenv(info_t *, char *);
 int _setenv(info_t *, char *, char *);
 
@@ -213,7 +213,7 @@ int renumber_history(info_t *info);
 list_t *add_node_end(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
 size_t print_list_str(const list_t *);
-int delete_note_at_index(list_t **, unsigned int);
+int delete_node_at_index(list_t **, unsigned int);
 void free_list(list_t **);
 
 /* lists1.c */
@@ -224,7 +224,7 @@ list_t *node_starts_with(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
 
 /* vars.c */
-int is_chain(info_t, char *, size_t);
+int is_chain(info_t *, char *, size_t *);
 void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);

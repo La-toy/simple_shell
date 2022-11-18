@@ -28,11 +28,11 @@ int is_cmd(info_t *info, char *path)
  * @start: starting index
  * @stop: stopping index
  *
- * Return: pointer to the new buffer
+ * Return: pointer to new buffer
  */
 char *dup_chars(char *pathstr, int start, int stop)
 {
-	static char  buf[1024];
+	static char buf[1024];
 	int i = 0, k = 0;
 
 	for (k = 0, i = start; i < stop; i++)
@@ -78,7 +78,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 				return (path);
 			if (!pathstr[i])
 				break;
-			curr_pos = 1;
+			curr_pos = i;
 		}
 		i++;
 	}
